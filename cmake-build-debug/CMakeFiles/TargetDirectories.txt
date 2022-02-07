@@ -1,0 +1,3 @@
+D:/uni/untitled1/project-fsadatl/cmake-build-debug/CMakeFiles/project-fsadatl.dir
+D:/uni/untitled1/project-fsadatl/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/uni/untitled1/project-fsadatl/cmake-build-debug/CMakeFiles/rebuild_cache.dir
