@@ -590,6 +590,10 @@ close_code.h
 
 ../sdl2/sdl2-include/close_code.h
 
+D:/uni/untitled1/project-fsadatl/src/amount.h
+
+D:/uni/untitled1/project-fsadatl/src/eventhandeling.h
+
 D:/uni/untitled1/project-fsadatl/src/main.c
 SDL.h
 -
@@ -603,6 +607,8 @@ stdbool.h
 -
 time.h
 -
+string.h
+-
 SDL2_gfxPrimitives.h
 -
 SDL_surface.h
@@ -611,4 +617,22 @@ stdio.h
 -
 stdbool.h
 -
+time.h
+-
+shooting.h
+D:/uni/untitled1/project-fsadatl/src/shooting.h
+eventhandeling.h
+D:/uni/untitled1/project-fsadatl/src/eventhandeling.h
+amount.h
+D:/uni/untitled1/project-fsadatl/src/amount.h
+SDL2_gfxPrimitives.h
+-
+SDL_surface.h
+-
+stdio.h
+-
+stdbool.h
+-
+
+D:/uni/untitled1/project-fsadatl/src/shooting.h
 

@@ -46,5 +46,8 @@ CMakeFiles/project-fsadatl.dir/src/main.c.obj: ../sdl2/sdl2-include/SDL_version.
 CMakeFiles/project-fsadatl.dir/src/main.c.obj: ../sdl2/sdl2-include/SDL_video.h
 CMakeFiles/project-fsadatl.dir/src/main.c.obj: ../sdl2/sdl2-include/begin_code.h
 CMakeFiles/project-fsadatl.dir/src/main.c.obj: ../sdl2/sdl2-include/close_code.h
+CMakeFiles/project-fsadatl.dir/src/main.c.obj: ../src/amount.h
+CMakeFiles/project-fsadatl.dir/src/main.c.obj: ../src/eventhandeling.h
 CMakeFiles/project-fsadatl.dir/src/main.c.obj: ../src/main.c
+CMakeFiles/project-fsadatl.dir/src/main.c.obj: ../src/shooting.h
 
