@@ -41,6 +41,8 @@ void drawBox( int x, int y , Uint32 color , char num[]) {
 
 int main() {
     struct state st[CELL_NUM+1];
+    int x1 , y1 , x2 , y2;
+    bool war=0;
     const Uint8* keys;
     int flag=1 , go=0;
     char name[30]={"\0"};
@@ -105,7 +107,19 @@ int main() {
                     break;
                 case SDL_TEXTINPUT:
                     strcat(name, sdlEvent.text.text);
-                    break;    
+                    break;
+                case SDL_MOUSEBUTTONDOWN:
+                        if(sdlEvent.button.button == SDL_BUTTON_LEFT ){
+                            x1=sdlEvent.button.x;
+                            y1=sdlEvent.button.y;
+                        }
+
+                case SDL_MOUSEBUTTONUP:
+                        if(sdlEvent.button.button == SDL_BUTTON_LEFT ){
+                            x2=sdlEvent.button.x;
+                            y2=sdlEvent.button.y;
+                            war=1;
+                        }
             }
         }
         if (!go){
@@ -131,7 +145,9 @@ int main() {
                 start(&st[i]);
                 SDL_RenderPresent(sdlRenderer);
             }
-
+        }
+        if (war){
+            attack(x1 , y1 , x2 , y2 , st);
         }
         SDL_RenderPresent(sdlRenderer);
         SDL_Delay(1 / FPS);
