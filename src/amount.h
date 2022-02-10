@@ -1,27 +1,22 @@
 
-int makestate(struct state *s ){
-    SDL_RenderPresent(sdlRenderer);
-    stringRGBA(sdlRenderer , s->x, s->y , s->soliders , 0xff , 0xff , 0xff , 0xff);
-    s->soliders++;
-    if (s->soliders>s->maxsoliders)
-    {
-        s->soliders=s->maxsoliders;
-        return 0;
-    } else return 1;
-    
-}
-
 void produce(struct state *s ){
+
     while (true)
     {
-        //sdldelay
-        if (!makestate(s))return;
+        SDL_RenderPresent(sdlRenderer);
+        sprintf(s->num, "%d" , s->soliders);
+        stringRGBA(sdlRenderer,s->x-2 , s->y+10, s->num, 0x00, 0x00 , 0x00 , 0xff);
+        s->soliders++;
+        if (s->soliders>s->maxsoliders)
+        {
+            s->soliders=s->maxsoliders;
+            return;
+        }
     }
 
 }
 
 void start(struct state *s ){
-    s->soliders=s->startamount;
     switch (s->statetype)
     {   //ordinary
         case 0:
@@ -31,13 +26,16 @@ void start(struct state *s ){
             //home
         case 1:
             s->maxsoliders=50;
+            s->startamount=10;
             break;
         case 2:
             s->maxsoliders=50;
+            s->startamount=10;
             break;
         default:
             break;
     }
-    produce(&s);
-
+    s->soliders=s->startamount;
+    produce(s);
 }
+

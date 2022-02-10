@@ -23,23 +23,28 @@ struct state
     Uint32 color;
     int maxsoliders;
     int startamount;
+    char num[3];
 };
 #include "shooting.h"
 #include "eventhandeling.h"
 #include "amount.h"
+#include "attack.h"
 
 
 
-void drawBox( int x, int y , Uint32 color) {
+void drawBox( int x, int y , Uint32 color , char num[]) {
     roundedBoxColor(sdlRenderer, x-40, y-40, x + 40 , y + 40, 10 ,  color);
     filledCircleColor(sdlRenderer, x , y, 5 , colorc);
+
 }
 
 
 int main() {
     struct state st[CELL_NUM+1];
-    int flag=1;
-    char name[30]={'\0'};
+    const Uint8* keys;
+    int flag=1 , go=0;
+    char name[30]={"\0"};
+    name[3]="\n";
     srand(time(0));
     int ime = rand()%CELL_NUM+1 ;
     int x=rand()%100;
@@ -67,7 +72,11 @@ int main() {
             st[i].x=SCREEN_WIDTH * i / CELL_NUM-x;
             st[i].statetype=0;
         }
+        st[i].num[0]='\0';
+        st[i].num[1]='\0';
+        st[i].num[2]='\0';
     }
+
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER) < 0) {
         printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
         return 0;
@@ -79,63 +88,58 @@ int main() {
     icon = SDL_LoadBMP("D:\\uni\\untitled1\\media\\11.bmp");
     SDL_SetWindowTitle(sdlWindow , "state.io");
     SDL_SetWindowIcon(sdlWindow , icon);
-//    SDL_Surface *image;
-//    SDL_Texture *text;
+    SDL_RenderPresent(sdlRenderer);
+    SDL_Surface *image;
+    SDL_Texture *text;
     SDL_bool shallExit = SDL_FALSE;
-    Sint16 tool = 233;
-    int i = 0;
     while (shallExit == SDL_FALSE) {
         SDL_Event sdlEvent;
-        while (SDL_PollEvent(&sdlEvent)) {
+        while (SDL_PollEvent(&sdlEvent) && !go) {
             switch (sdlEvent.type) {
                 case SDL_QUIT:
                     shallExit = SDL_TRUE;
                     break;
                 case SDL_KEYDOWN:
-                    if (sdlEvent.text.text=="\n")
-                        for (int j = 0; j <CELL_NUM ; ++j) {
-                            start(&st[j]);
-                        }
+                    if (sdlEvent.key.keysym.sym==SDLK_RETURN||sdlEvent.key.keysym.sym==SDLK_KP_ENTER)
+                        go=1;
                     break;
                 case SDL_TEXTINPUT:
                     strcat(name, sdlEvent.text.text);
                     break;    
             }
         }
-        
-  //      stringRGBA(sdlRenderer, SCREEN_HEIGHT/2 , SCREEN_HEIGHT/2 , name, 0x00, 0xbb, 0xaa, 0xee);
-        //ورود
-//            image = SDL_LoadBMP("D:\\uni\\untitled1\\media\\starterArtboard-1.bmp");
-//            if(!image){
-//                printf("%s\n" ,SDL_GetError());
-//                return 3;
-//            }
-//            text=SDL_CreateTextureFromSurface(sdlRenderer,image);
-//            SDL_RenderPresent(sdlRenderer);
-//            SDL_RenderCopy(sdlRenderer,text,NULL,NULL);
-
+        if (!go){
+            image = SDL_LoadBMP("D:\\uni\\untitled1\\media\\starter.bmp");
+            if(!image){
+                printf("%s\n" ,SDL_GetError());
+                return 3;
+            }
+            text=SDL_CreateTextureFromSurface(sdlRenderer,image);
+            SDL_RenderPresent(sdlRenderer);
+            SDL_RenderCopy(sdlRenderer,text,NULL,NULL);
+        }
+        stringRGBA(sdlRenderer,SCREEN_WIDTH/2-70, SCREEN_HEIGHT/2-175 , "enter your name" , 0xff, 0xff, 0xff, 0xff );
+        stringRGBA(sdlRenderer,SCREEN_WIDTH/2-40 , SCREEN_HEIGHT/2-100 , name , 0xff, 0xff, 0xff, 0xff );
         //نقشه
-        SDL_SetRenderDrawColor(sdlRenderer, 0xff, 0xff, 0xff, 0xff);
-        SDL_RenderClear(sdlRenderer);
-        for (int j = 1; j <=CELL_NUM; ++j) {
-
-            drawBox(st[j].x , st[j].y , st[j].color);
+        if (go){
+            SDL_SetRenderDrawColor(sdlRenderer, 0xff, 0xff, 0xff, 0xff);
+            SDL_RenderClear(sdlRenderer);
+            for (int j = 1; j <=CELL_NUM; ++j){
+                drawBox(st[j].x , st[j].y , st[j].color , st[j].num);
+            }
+            for (int i = 0; i <=CELL_NUM ; ++i) {
+                start(&st[i]);
+                SDL_RenderPresent(sdlRenderer);
+            }
 
         }
-
-
         SDL_RenderPresent(sdlRenderer);
-//        if (flag){
-//            Sint16 ratio=(500)/(300);
-//            shooting( 600 , 400 , 100 , 100 , ratio);
-//        }
-//       flag=0;
+        SDL_Delay(1 / FPS);
 
-        SDL_Delay(100 / FPS);
+
     }
-
-    
-//    SDL_FreeSurface(image);
+    SDL_FreeSurface(image);
+    SDL_FreeSurface(text);
     SDL_DestroyWindow(sdlWindow);
     SDL_Quit();
     return 0;

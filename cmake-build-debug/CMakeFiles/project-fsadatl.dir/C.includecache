@@ -592,22 +592,12 @@ close_code.h
 
 D:/uni/untitled1/project-fsadatl/src/amount.h
 
+D:/uni/untitled1/project-fsadatl/src/attack.h
+
 D:/uni/untitled1/project-fsadatl/src/eventhandeling.h
 
 D:/uni/untitled1/project-fsadatl/src/main.c
 SDL.h
--
-SDL2_gfxPrimitives.h
--
-SDL_surface.h
--
-stdio.h
--
-stdbool.h
--
-time.h
--
-string.h
 -
 SDL2_gfxPrimitives.h
 -
@@ -625,6 +615,8 @@ eventhandeling.h
 D:/uni/untitled1/project-fsadatl/src/eventhandeling.h
 amount.h
 D:/uni/untitled1/project-fsadatl/src/amount.h
+attack.h
+D:/uni/untitled1/project-fsadatl/src/attack.h
 SDL2_gfxPrimitives.h
 -
 SDL_surface.h

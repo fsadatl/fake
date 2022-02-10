@@ -9,7 +9,8 @@ int motion_guess(Sint16 x1 , Sint16 y1 , Sint16 x2 , Sint16 y2 ){
         return 4;
 }
 
-void shooting(Sint16 x1 , Sint16 y1 , Sint16 x2 , Sint16 y2 , Sint16 ratio){
+void shoot(Sint16 x1 , Sint16 y1 , Sint16 x2 , Sint16 y2){
+    float ratio=(float)(x2 - x1)/(y2-y1);
     switch (motion_guess(x1 , y1 , x2 , y2)) {
         case 1:
             if (ratio>1)
